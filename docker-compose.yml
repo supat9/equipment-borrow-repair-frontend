@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: next-docker-development
+    ports:
+      - "8081:3000"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+      - /app/.next
+    env_file:
+      - .env.local
+    environment:
+      - NODE_ENV=production
+    command: sh -c "npm run build && npm run start"
